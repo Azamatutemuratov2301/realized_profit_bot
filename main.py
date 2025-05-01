@@ -1,17 +1,20 @@
-import logging
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
-TOKEN = "8158588417:AAEHli-xAhqOZewNlXoSfb1XS8-dZ9nwjjg"
+app = FastAPI()
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+class Signal(BaseModel):
+    symbol: str
+    action: str  # BUY yoki SELL
+    price: float
+    sl: float
+    tp: float
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Realized_Profit botiga xush kelibsiz!")
+@app.get("/")
+def root():
+    return {"message": "Realized_Profit backend ishlamoqda"}
 
-if __name__ == '__main__':
-    app = ApplicationBuilder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    print("Bot ishga tushdi...")
-    app.run_polling()
+@app.post("/signal")
+def receive_signal(signal: Signal):
+    print(f"📡 Signal qabul qilindi: {signal}")
+    return {"status": "success", "detail": f"{signal.action} signal qabul qilindi"}
