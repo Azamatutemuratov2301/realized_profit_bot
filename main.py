@@ -19,3 +19,11 @@ async def startup_event():
     await application.initialize()
     await application.start()
     await application.updater.start_polling()
+    from fastapi import FastAPI
+from bot import run_bot
+
+app = FastAPI()
+
+@app.on_event("startup")
+async def startup_event():
+    run_bot()
