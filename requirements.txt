@@ -1,6 +1,2 @@
-python-telegram-bot==20.3
-fastapi==0.110.0
-uvicorn==0.29.0
-sqlalchemy==2.0.29
-psycopg2-binary==2.9.9
-MetaTrader5==5.0.44
+fastapi
+uvicorn
