@@ -3,4 +3,4 @@ uvicorn
 python-telegram-bot==20.3
 sqlalchemy
 pymysql
-python-dotenv
+python-dotenv==0.19.2
