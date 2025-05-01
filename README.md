@@ -1,2 +1,3 @@
-# realized_profit_bot
-Realized_Profit
+# Realized Profit Bot
+
+Telegram savdo botining asosiy kodi.
