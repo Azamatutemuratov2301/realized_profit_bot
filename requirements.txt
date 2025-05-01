@@ -1,6 +1,5 @@
+python-telegram-bot==20.3
 fastapi
 uvicorn
-python-telegram-bot==20.3
 sqlalchemy
 pymysql
-python-dotenv==0.19.2
