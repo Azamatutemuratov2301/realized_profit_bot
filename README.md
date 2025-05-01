@@ -1,3 +1,3 @@
 # Realized Profit Bot
 
-Telegram savdo botining asosiy kodi.
+Telegram savdo bot: til tanlash, signal, statistikalar va avtomatik savdo uchun backend tayyorlangan.
