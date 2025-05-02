@@ -2,7 +2,7 @@ import MetaTrader5 as mt5
 import time
 import requests
 
-BOT_TOKEN = "8158588417:AAEWgpCAPZiy1ZihL6vQLZGmGbn4QMqIQOg"
+BOT_TOKEN = "8158588417:AAEVoM7CdKJztk_eJHrHvipbUkRXYfHKowA"
 CHAT_ID = "-100"  # Yoki sizning Telegram guruh ID (agar guruhga yuborilsa)
 SYMBOL = "XAUUSD"  # Faqat GOLD
 
