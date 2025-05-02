@@ -1,7 +1,8 @@
+# main.py
 from fastapi import FastAPI
 
 app = FastAPI()
 
 @app.get("/")
-def root():
-    return {"message": "Realized Profit Bot is running"}
+async def read_root():
+    return {"message": "Realized_Profit backend is running"}
