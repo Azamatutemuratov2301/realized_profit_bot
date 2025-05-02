@@ -32,3 +32,39 @@ def main():
 
 if name == "main":
     main()
+
+from fastapi import FastAPI
+from telegram import Update
+from telegram.ext import (
+    Application, CommandHandler, MessageHandler,
+    filters, ContextTypes
+)
+import asyncio
+import os
+
+from config import BOT_TOKEN
+from bot_logic import (
+    start_command,
+    change_language_command,
+    handle_language_selection,
+    calculate_profit_command,
+    handle_price_input
+)
+
+# FastAPI ilovasi
+app = FastAPI()
+
+# Telegram bot ilovasi
+bot_app = Application.builder().token(BOT_TOKEN).build()
+
+# Handlerlar
+bot_app.add_handler(CommandHandler("start", start_command))
+bot_app.add_handler(MessageHandler(filters.Regex("^(🌐|Tilni o'zgartirish|Select language|Выберите язык|Тілді таңдаңыз)$"), change_language_command))
+bot_app.add_handler(MessageHandler(filters.Regex("^(uz|en|ru|kz)$"), handle_language_selection))
+bot_app.add_handler(MessageHandler(filters.Regex("^(📊|Foydani hisoblash|Your profit|Ваша прибыль|Сіздің пайдаңыз)$"), calculate_profit_command))
+bot_app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_price_input))
+
+# Asosiy ishga tushirish
+@app.on_event("startup")
+async def startup_event():
+    asyncio.create_task(bot_app.run_polling())
