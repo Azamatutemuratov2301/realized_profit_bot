@@ -1,0 +1,2 @@
+BOT_TOKEN = "8158588417:AAEHli-xAhqOZewNlXoSfb1XS8-dZ9nwjjg"
+ADMIN_ID = None  # Foydalanuvchi hali admin ID bermadi
