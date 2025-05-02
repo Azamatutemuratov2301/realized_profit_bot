@@ -1,19 +1,26 @@
+import asyncio
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import (
+    ApplicationBuilder, CommandHandler, ContextTypes
+)
 from config import BOT_TOKEN, ADMIN_ID
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = update.effective_user.id
-    if str(user_id) == str(ADMIN_ID):
-        await update.message.reply_text("Assalomu alaykum, admin! Bot ishga tushdi.")
-    else:
-        await update.message.reply_text("Assalomu alaykum! Sizda to‘liq ruxsat yo‘q.")
+    await update.message.reply_text("Assalomu alaykum! Realized_Profit botiga xush kelibsiz.")
 
-app = ApplicationBuilder().token(BOT_TOKEN).build()
-app.add_handler(CommandHandler("start", start))
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Yordam: Buyruqlar ro‘yxati:\n/start - Boshlash\n/help - Yordam")
 
-print("✅ Bot ishga tushdi...")
-app.run_polling()
+async def start_bot():
+    app = ApplicationBuilder().token(BOT_TOKEN).build()
+    
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("help", help_command))
+
+    print("Bot ishga tushdi...")
+    await app.initialize()
+    await app.start()
+    await app.updater.start_polling()
 from config import LANGUAGES, DEFAULT_LANG, BOT_TOKEN, ADMIN_ID
 
 class TradingBot:
