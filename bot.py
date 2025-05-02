@@ -57,3 +57,6 @@ class TradingBot:
         if profit >= 0:
             return self.get_text('profit_message', amount=profit)
         return self.get_text('loss_message', amount=abs(profit))
+from handlers.signal import send_signal
+
+application.add_handler(CommandHandler("signal", send_signal))
