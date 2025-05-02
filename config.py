@@ -1,6 +1,6 @@
 # config.py
 
-BOT_TOKEN = "8158588417:AAEWgpCAPZiy1ZihL6vQLZGmGbn4QMqIQOg"
+BOT_TOKEN = "8158588417:AAEVoM7CdKJztk_eJHrHvipbUkRXYfHKowA"
 ADMIN_ID = 731008470
 
 # Til sozlamalari
