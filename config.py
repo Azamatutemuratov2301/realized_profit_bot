@@ -1,24 +1,41 @@
 BOT_TOKEN = "8158588417:AAEHli-xAhqOZewNlXoSfb1XS8-dZ9nwjjg"
 ADMIN_ID = 731008470
-# config.py (mavjud tarkibni saqlab)
+# config.py
 
-# Avvalgi mavjud sozlamalar (o'zgartirmasdan qoldiring)
-BOT_TOKEN = "123456:ABC-DEF1234ghIkl..."  # <-- Sizda allaqachon bor
-ADMIN_ID = 123456789  # <-- Sizda allaqachon bor
+# Bot asosiy sozlamalari
+BOT_TOKEN = "123456:ABC-DEF1234ghIkl..."  # <-- Sizning token
+ADMIN_ID = 123456789  # <-- Sizning admin ID
 
-# Til sozlamalarini QO'SHISH (yangi qism)
+# To'liq til sozlamalari (4 til)
 LANGUAGES = {
     'uz': {
         'welcome': "🤖 Savdo botiga xush kelibsiz!",
         'profit': "💲 Sizning foydangiz: {amount}",
-        'menu': "Quyidagilardan birini tanlang:"
+        'loss': "⚠️ Yo'qotishingiz: {amount}",
+        'menu': "Quyidagilardan birini tanlang:",
+        'change_lang': "Tilni tanlang:"
     },
     'en': {
         'welcome': "🤖 Welcome to trading bot!",
         'profit': "💲 Your profit: {amount}",
-        'menu': "Please choose an option:"
+        'loss': "⚠️ Your loss: {amount}",
+        'menu': "Please choose an option:",
+        'change_lang': "Select language:"
+    },
+    'ru': {
+        'welcome': "🤖 Добро пожаловать в торговый бот!",
+        'profit': "💲 Ваша прибыль: {amount}",
+        'loss': "⚠️ Ваш убыток: {amount}",
+        'menu': "Выберите вариант:",
+        'change_lang': "Выберите язык:"
+    },
+    'kz': {
+        'welcome': "🤖 Сауда ботына қош келдіңіз!",
+        'profit': "💲 Сіздің пайдаңыз: {amount}",
+        'loss': "⚠️ Сіздің шығыныңыз: {amount}",
+        'menu': "Таңдаңыз:",
+        'change_lang': "Тілді таңдаңыз:"
     }
-    # ru, kz tillarini ham shu tarzda qo'shing
 }
 
 DEFAULT_LANG = 'uz'  # Standart til
