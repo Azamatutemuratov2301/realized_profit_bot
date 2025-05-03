@@ -1,28 +1,41 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
-from config import BOT_TOKEN
-from master_trader import connect_master
-from copy_trader import copy_positions_to_slave
+# main.py
+from fastapi import FastAPI
+from pydantic import BaseModel
+from mt5_utils import connect_to_mt5, disconnect_mt5, get_account_info, get_open_orders, send_order
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Salom! Copy trading bot ishga tushdi.")
+app = FastAPI()
 
-async def copy(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if len(context.args) != 3:
-        await update.message.reply_text("Foydalanish: /copy login password server")
-        return
-    login = int(context.args[0])
-    password = context.args[1]
-    server = context.args[2]
-    try:
-        copy_positions_to_slave(login, password, server)
-        await update.message.reply_text("Pozitsiyalar muvaffaqiyatli ko'chirildi.")
-    except Exception as e:
-        await update.message.reply_text(f"Xatolik: {e}")
+class MT5LoginData(BaseModel):
+    login: int
+    password: str
+    server: str
 
-if __name__ == "__main__":
-    connect_master()
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("copy", copy))
-    app.run_polling()
+class OrderData(BaseModel):
+    symbol: str
+    lot: float
+    order_type: str  # "buy" or "sell"
+    sl: float | None = None
+    tp: float | None = None
+
+@app.post("/login")
+def login(data: MT5LoginData):
+    if connect_to_mt5(data.login, data.password, data.server):
+        return {"status": "success"}
+    return {"status": "error"}
+
+@app.get("/account")
+def account_info():
+    return get_account_info()
+
+@app.get("/orders")
+def orders():
+    return get_open_orders()
+
+@app.post("/trade")
+def trade(data: OrderData):
+    return send_order(data.symbol, data.lot, data.order_type, data.sl, data.tp)
+
+@app.get("/logout")
+def logout():
+    disconnect_mt5()
+    return {"status": "disconnected"}
