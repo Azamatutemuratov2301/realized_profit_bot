@@ -1,5 +1,5 @@
 fastapi
 uvicorn
-MetaTrader5==5.0.37
+
 python-telegram-bot==20.3
 requests
