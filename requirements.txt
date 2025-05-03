@@ -1,2 +1,7 @@
-python-telegram-bot==20.7
+fastapi
 uvicorn
+python-telegram-bot==20.3
+MetaTrader5
+sqlalchemy
+psycopg2-binary
+pydantic
