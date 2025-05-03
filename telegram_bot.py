@@ -5,7 +5,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, Con
 
 API_URL = "http://127.0.0.1:8000"  # FastAPI manzili
 TELEGRAM_TOKEN = "8158588417:AAEVoM7CdKJztk_eJHrHvipbUkRXYfHKowA"
-ADMIN_ID = 313652330
+ADMIN_ID = 731008470
 
 keyboard = [["BUY GOLD", "SELL GOLD"]]
 markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
