@@ -9,7 +9,7 @@ SERVER = "XMGlobal-MT5 7"
 
 # Telegram bot token
 BOT_TOKEN = "8158588417:AAEVoM7CdKJztk_eJHrHvipbUkRXYfHKowA"
-ADMIN_ID = 99026423  # Sizning Telegram ID
+ADMIN_ID = 731008470  # Sizning Telegram ID
 
 # MT5 ga ulanish
 def mt5_connect():
