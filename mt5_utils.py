@@ -1,8 +1,8 @@
 import MetaTrader5 as mt5
 
-LOGIN = 99026423
+LOGIN = 313652330
 PASSWORD = "Azamat2301,"
-SERVER = "XMGlobal-MT5 5"
+SERVER = "XMGlobal-MT5 7"
 
 def connect_mt5():
     if not mt5.initialize(login=LOGIN, password=PASSWORD, server=SERVER):
