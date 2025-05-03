@@ -1,21 +1,19 @@
-# telegram_bot.py
 import requests
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 
-API_URL = "http://127.0.0.1:8000"  # FastAPI server manzili
-TELEGRAM_TOKEN = "YOUR_BOT_TOKEN"  # <-- bu yerga o‘zingizning bot tokeningizni yozing
-ADMIN_ID = 313652330  # faqat siz foydalanishingiz uchun
+API_URL = "http://127.0.0.1:8000"
+TELEGRAM_TOKEN = "8158588417:AAEVoM7CdKJztk_eJHrHvipbUkRXYfHKowA"
+ADMIN_ID = 313652330
 
-# Buy/Sell menyu
 keyboard = [["BUY GOLD", "SELL GOLD"]]
 markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id != ADMIN_ID:
-        await update.message.reply_text("Sizga ruxsat yo‘q.")
+        await update.message.reply_text("Ruxsat yo‘q.")
         return
-    await update.message.reply_text("Savdoga tayyor. Buyruq tanlang:", reply_markup=markup)
+    await update.message.reply_text("Savdoga tayyor. Tanlang:", reply_markup=markup)
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
@@ -24,14 +22,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     text = update.message.text
-
     if text == "BUY GOLD":
         response = requests.post(f"{API_URL}/trade", json={
             "symbol": "XAUUSD",
             "lot": 0.1,
             "order_type": "buy"
         })
-        await update.message.reply_text(f"BUY buyrug‘i yuborildi: {response.json()}")
+        await update.message.reply_text(f"BUY yuborildi: {response.json()}")
 
     elif text == "SELL GOLD":
         response = requests.post(f"{API_URL}/trade", json={
@@ -39,10 +36,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "lot": 0.1,
             "order_type": "sell"
         })
-        await update.message.reply_text(f"SELL buyrug‘i yuborildi: {response.json()}")
+        await update.message.reply_text(f"SELL yuborildi: {response.json()}")
 
     else:
-        await update.message.reply_text("Iltimos, menyudan tanlang.")
+        await update.message.reply_text("Menyudan tanlang.")
 
 def run_bot():
     app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()

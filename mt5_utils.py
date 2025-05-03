@@ -1,42 +1,37 @@
-# mt5_utils.py
 import MetaTrader5 as mt5
 
-def connect_to_mt5(login: int, password: str, server: str) -> bool:
-    if not mt5.initialize(login=login, password=password, server=server):
-        print("MT5 ulanishda xatolik:", mt5.last_error())
-        return False
-    return True
+LOGIN = 99026423
+PASSWORD = "Azamat2301,"
+SERVER = "XMGlobal-MT5 5"
 
-def disconnect_mt5():
-    mt5.shutdown()
+def connect_mt5():
+    if not mt5.initialize(login=LOGIN, password=PASSWORD, server=SERVER):
+        raise Exception("MT5 ulanishda xatolik:", mt5.last_error())
 
-def get_account_info():
-    return mt5.account_info()._asdict() if mt5.account_info() else None
+def open_trade(symbol: str, lot: float, order_type: str):
+    connect_mt5()
+    symbol_info = mt5.symbol_info(symbol)
+    if symbol_info is None:
+        return {"error": "Symbol not found"}
 
-def get_open_orders():
-    orders = mt5.positions_get()
-    return [order._asdict() for order in orders] if orders else []
+    mt5.symbol_select(symbol, True)
 
-def send_order(symbol: str, lot: float, order_type: str, sl: float = None, tp: float = None) -> dict:
-    price = mt5.symbol_info_tick(symbol).ask if order_type == "buy" else mt5.symbol_info_tick(symbol).bid
-    order_type_map = {"buy": mt5.ORDER_TYPE_BUY, "sell": mt5.ORDER_TYPE_SELL}
+    order_type_code = mt5.ORDER_TYPE_BUY if order_type.lower() == "buy" else mt5.ORDER_TYPE_SELL
+
+    price = symbol_info.ask if order_type.lower() == "buy" else symbol_info.bid
+
     request = {
         "action": mt5.TRADE_ACTION_DEAL,
         "symbol": symbol,
         "volume": lot,
-        "type": order_type_map[order_type],
+        "type": order_type_code,
         "price": price,
         "deviation": 10,
-        "magic": 234000,
-        "comment": "Realized Profit Bot",
+        "magic": 123456,
+        "comment": "Telegram Copy Trading",
         "type_time": mt5.ORDER_TIME_GTC,
         "type_filling": mt5.ORDER_FILLING_IOC,
     }
-
-    if sl:
-        request["sl"] = sl
-    if tp:
-        request["tp"] = tp
 
     result = mt5.order_send(request)
     return result._asdict()
