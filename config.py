@@ -1,9 +1,0 @@
-# config.py
-
-BOT_TOKEN = "8158588417:AAEVoM7CdKJztk_eJHrHvipbUkRXYfHKowA"
-ADMIN_ID = 731008470
-
-# MetaTrader5 account info
-MT5_LOGIN = 313652330
-MT5_PASSWORD = "Azamat2301,"
-MT5_SERVER = "XMGlobal-MT5 7"
