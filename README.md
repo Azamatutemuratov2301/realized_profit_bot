@@ -1,12 +1,25 @@
-# Realized Profit Bot
+# Realized Profit Copy Trading Bot
 
-Telegram savdo bot: til tanlash, signal, statistikalar va avtomatik savdo uchun backend tayyorlangan.
-Ishga tushirish uchun:
+This bot copies trades from a master MT5 account to multiple slave accounts in real time.
 
-1. Kutubxonalarni o‘rnating:
-   pip install -r requirements.txt
+## Setup
 
-2. Backendni ishga tushuring:
-   uvicorn main:app --reload
+1. Install Python dependencies:
+```
+pip install -r requirements.txt
+```
 
-Bot ishga tushadi va Telegramda /start bosganingizda javob qaytaradi.
+2. Edit `config.yaml` with your MT5 account details and paths.
+
+3. Ensure each MT5 terminal is installed at the given `path` in `config.yaml`.
+
+4. Run the bot:
+```
+python main.py
+```
+
+## How it works
+
+- `main.py` loads configuration and initializes MT5Connector.
+- `mt5_connector.py` handles connections to master and slave accounts.
+- `copy_logic.py` continuously monitors master positions and opens/closes positions on slaves.
